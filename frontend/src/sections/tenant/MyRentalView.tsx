@@ -39,8 +39,8 @@ export default function MyRentalView() {
         "Property Owner",
       landlordEmail: r.landlordId?.email || r.propertyId?.ownerEmail,
       landlordPhone: r.landlordId?.phone || r.propertyId?.ownerPhone,
-      amountPaid: r.rentAmount || 0,
-      month: r.month,
+      totalRent: Number(r.propertyId?.price) || Number(r.rentAmount) || 0,
+      amountPaid: Number(r.rentAmount) || 0,
       paidAt: r.paidAt || r.createdAt,
       status: "paid",
     }));
@@ -49,9 +49,9 @@ export default function MyRentalView() {
     { id: "property", label: "Property" },
     { id: "landlord", label: "Paid To (Landlord)" },
     { id: "amountPaid", label: "Amount Paid", align: "right" },
+    { id: "balanceDue", label: "Balance Due", align: "right" },
     { id: "paidAt", label: "Payment Date", align: "center" },
-    { id: "month", label: "Billing Month", align: "center" },
-    { id: "status", label: "Payment Status", align: "center" },
+    { id: "status", label: "Status", align: "center" },
   ];
 
   return (

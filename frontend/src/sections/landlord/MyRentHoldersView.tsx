@@ -49,7 +49,6 @@ export default function MyRentHoldersView() {
       propertyLocation: p.location || "Location",
       rentPrice: Number(p.price) || 0,
       paidAmount: p.rentalDetails?.rentAmount,
-      paymentMonth: p.rentalDetails?.month,
       paidAt: p.rentalDetails?.paidAt,
       status: p.rentalDetails ? "paid" : "pending",
     }));
@@ -58,7 +57,8 @@ export default function MyRentHoldersView() {
     { id: "tenant", label: "Tenant Details" },
     { id: "property", label: "Property" },
     { id: "price", label: "Monthly Rent", align: "right" },
-    { id: "rentPaid", label: "Rent Paid / Month", align: "right" },
+    { id: "rentPaid", label: "Rent Paid", align: "right" },
+    { id: "balanceDue", label: "Balance Due", align: "right" },
     { id: "paidAt", label: "Payment Date", align: "center" },
     { id: "status", label: "Status", align: "center" },
   ];
