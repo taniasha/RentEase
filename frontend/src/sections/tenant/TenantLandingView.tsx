@@ -23,7 +23,7 @@ export default function TenantLandingView() {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-12">
+    <div className="w-full mx-auto px-4 py-8 space-y-12">
       {/* Welcome Banner */}
       <div className="relative rounded-3xl bg-gradient-to-tr from-slate-900 via-blue-950 to-slate-900 text-white p-8 sm:p-12 overflow-hidden shadow-xl border border-slate-800">
         <div className="relative z-10 max-w-2xl">

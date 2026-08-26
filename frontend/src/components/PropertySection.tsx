@@ -31,8 +31,8 @@ export default function PropertySection() {
   }, []);
 
   return (
-    <div className="mx-auto px-4 space-y-6">
-        <CustomHeading title="Available Properties" icon="boxicons:buildings"  />
+    <div className="w-full px-4 space-y-6">
+      <CustomHeading title="Available Properties" icon="boxicons:buildings" />
 
       {loading ? (
         <LoadingSpinner message="Loading properties..." />
@@ -42,15 +42,13 @@ export default function PropertySection() {
           description="There are currently no listings published. Check back soon!"
         />
       ) : (
-        <Card className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((p) => (
             <div
               key={p._id}
               className="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
             >
-              {/* Image Preview */}
               <div className="relative h-52 w-full overflow-hidden bg-slate-100">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.images && p.images[0] ? p.images[0] : "/default.jpg"}
                   alt={p.title || "Property image"}

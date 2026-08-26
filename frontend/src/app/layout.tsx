@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+      <body className=" min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
         <ToastContainer position="top-right" autoClose={3000} theme="light" />
         {children}
       </body>
