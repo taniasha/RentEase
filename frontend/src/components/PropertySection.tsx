@@ -7,6 +7,8 @@ import { getAllProperties } from "@/actions/property";
 import LoadingSpinner from "@/customComponents/LoadingSpinner";
 import EmptyState from "@/customComponents/EmptyState";
 import { Property } from "@/types/interface";
+import CustomHeading from "@/customComponents/CustomHeading";
+import Card from "@/customComponents/Card";
 
 export default function PropertySection() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -29,17 +31,8 @@ export default function PropertySection() {
   }, []);
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h2 className="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Available Properties
-          </h2>
-          <p className="text-sm text-slate-500 mt-1">
-            Browse verified listings ready for lease or sale.
-          </p>
-        </div>
-      </div>
+    <div className="mx-auto px-4 space-y-6">
+        <CustomHeading title="Available Properties" icon="boxicons:buildings"  />
 
       {loading ? (
         <LoadingSpinner message="Loading properties..." />
@@ -49,7 +42,7 @@ export default function PropertySection() {
           description="There are currently no listings published. Check back soon!"
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((p) => (
             <div
               key={p._id}
@@ -103,8 +96,8 @@ export default function PropertySection() {
               </div>
             </div>
           ))}
-        </div>
+        </Card>
       )}
-    </section>
+    </div>
   );
 }

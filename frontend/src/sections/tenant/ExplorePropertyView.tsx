@@ -5,7 +5,7 @@ import PropertySection from "@/components/PropertySection";
 
 export default function ExplorePropertyView() {
   return (
-    <div className="container py-4">
+    <div className="container">
       <PropertySection />
     </div>
   );

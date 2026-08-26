@@ -11,6 +11,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import LoadingSpinner from "./LoadingSpinner";
+import Card from "./Card";
 
 export interface HeaderItem {
   id: string;
@@ -44,10 +45,10 @@ export default function CustomTable({
   }
 
   return (
-    <div className={cn("w-full overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm", className)}>
-      <Table>
-        <TableHeader>
-          <TableRow>
+    <Card className="w-full overflow-hidden">
+      <Table >
+        <TableHeader className="rounded-xl bg-[#F0F4FB] hover:bg-[#F0F4FB] ">
+          <TableRow className="rounded-xl ">
             {headers.map((h) => (
               <TableHead
                 key={h.id}
@@ -76,6 +77,6 @@ export default function CustomTable({
           )}
         </TableBody>
       </Table>
-    </div>
+    </Card>
   );
 }

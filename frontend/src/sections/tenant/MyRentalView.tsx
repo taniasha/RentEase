@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Receipt } from "lucide-react";
+import { Receipt, ReceiptEuro } from "lucide-react";
 import { getMyRentals } from "@/actions/tenant";
 import CustomTable, { HeaderItem } from "@/customComponents/CustomTable";
 import RentalTableRow, { RentalRowData } from "./RentalTableRow";
 import { Rental } from "@/types/interface";
+import CustomHeading from "@/customComponents/CustomHeading";
 
 export default function MyRentalView() {
   const [rentals, setRentals] = useState<Rental[]>([]);
@@ -55,12 +56,8 @@ export default function MyRentalView() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
-          <Receipt className="w-7 h-7 text-brand-800" /> My Rental Receipts
-        </h1>
-      </div>
+    <div className="mx-auto px-4 space-y-6">
+        <CustomHeading title="My Rentals" icon="solar:bill-list-bold-duotone" />
 
       <CustomTable
         headers={headers}
