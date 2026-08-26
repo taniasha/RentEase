@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 
 export interface CustomInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -48,15 +49,15 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             </div>
           )}
 
-          <input
+          <Input
             ref={ref}
             id={inputId}
             name={name}
             type={type}
             className={cn(
-              "flex h-11 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-900 shadow-sm transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 disabled:cursor-not-allowed disabled:opacity-50",
+              "h-11 rounded-md px-3.5 text-sm shadow-sm",
               icon && "pl-10",
-              error && "border-red-500 focus:ring-red-500/20 focus:border-red-500",
+              error && "border-red-500 focus-visible:ring-red-500/20",
               className
             )}
             {...props}

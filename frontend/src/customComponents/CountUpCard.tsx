@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Users, Home, TrendingUp, Sparkles } from "lucide-react";
 
 interface StatItemProps {
@@ -12,44 +12,70 @@ interface StatItemProps {
 
 const StatItem = ({ end, label, suffix = "", icon }: StatItemProps) => {
   const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let start = 0;
-    const duration = 1500;
-    const increment = end / (duration / 16);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
+    if (domRef.current) {
+      observer.observe(domRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let startTime: number | null = null;
+    const duration = 1400; // ms
+
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      // Ease out cubic for silky smooth finish
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(easeOut * end));
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
       } else {
-        setCount(Math.floor(start));
+        setCount(end);
       }
-    }, 16);
+    };
 
-    return () => clearInterval(timer);
-  }, [end]);
+    const animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [hasStarted, end]);
 
   return (
-    <div className="flex flex-col items-center p-6 text-center">
-      <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-3 border border-blue-500/20">
+    <div ref={domRef} className="flex flex-col items-center p-6 text-center">
+      <div className="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-800 mb-3 border border-brand-200/60 shadow-2xs">
         {icon}
       </div>
-      <div className="text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-1">
+      <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-1 tabular-nums">
         {count.toLocaleString()}
-        <span className="text-blue-400 font-bold">{suffix}</span>
+        <span className="text-brand-800 font-bold ml-0.5">{suffix}</span>
       </div>
-      <p className="text-sm font-medium text-slate-400">{label}</p>
+      <p className="text-xs sm:text-sm font-medium text-slate-500">{label}</p>
     </div>
   );
 };
 
-export default function CountUpCards() {
+export default function CountUpCard() {
   return (
-    <div className="max-w-6xl mx-auto px-4 -mt-12 relative z-20">
-      <div className="bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl shadow-slate-950/30">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-800/80">
+    <section className="max-w-6xl mx-auto px-4 w-full my-6 relative z-10">
+      <div className="bg-white border border-slate-200/80 rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl shadow-slate-200/40">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
           <StatItem
             end={1200}
             suffix="+"
@@ -76,6 +102,6 @@ export default function CountUpCards() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

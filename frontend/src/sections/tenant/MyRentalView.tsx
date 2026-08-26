@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Receipt, MapPin, Calendar, CheckCircle2 } from "lucide-react";
+import { Receipt } from "lucide-react";
 import { getMyRentals } from "@/actions/tenant";
-import EmptyState from "@/customComponents/EmptyState";
-import LoadingSpinner from "@/customComponents/LoadingSpinner";
-import StatusBadge from "@/customComponents/StatusBadge";
+import CustomTable, { HeaderItem } from "@/customComponents/CustomTable";
+import RentalTableRow, { RentalRowData } from "./RentalTableRow";
 import { Rental } from "@/types/interface";
 
 export default function MyRentalView() {
@@ -27,78 +26,52 @@ export default function MyRentalView() {
     fetchRentals();
   }, []);
 
+  // Map backend rental records into structured row object array
+  const rentalRows: RentalRowData[] = rentals
+    .filter((r) => r && (r._id || r.propertyId))
+    .map((r, idx) => ({
+      _id: r._id || `rental-${idx}`,
+      propertyTitle: r.propertyId?.title || r.propertyId?.name || "Rented Property",
+      propertyLocation: r.propertyId?.location || "Location not specified",
+      landlordName:
+        r.landlordId?.name ||
+        r.propertyId?.ownerName ||
+        "Property Owner",
+      landlordEmail: r.landlordId?.email || r.propertyId?.ownerEmail,
+      landlordPhone: r.landlordId?.phone || r.propertyId?.ownerPhone,
+      amountPaid: r.rentAmount || 0,
+      month: r.month,
+      paidAt: r.paidAt || r.createdAt,
+      status: "paid",
+    }));
+
+  const headers: HeaderItem[] = [
+    { id: "property", label: "Property" },
+    { id: "landlord", label: "Paid To (Landlord)" },
+    { id: "amountPaid", label: "Amount Paid", align: "right" },
+    { id: "paidAt", label: "Payment Date", align: "center" },
+    { id: "month", label: "Billing Month", align: "center" },
+    { id: "status", label: "Payment Status", align: "center" },
+  ];
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
-            <Receipt className="w-7 h-7 text-blue-600" /> My Rental Receipts
-          </h1>
-          <p className="text-sm text-slate-500 mt-1">
-            Track and verify all your completed rental payments.
-          </p>
-        </div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
+          <Receipt className="w-7 h-7 text-brand-800" /> My Rental Receipts
+        </h1>
       </div>
 
-      {loading ? (
-        <LoadingSpinner message="Loading your rental history..." />
-      ) : rentals.length === 0 ? (
-        <EmptyState
-          title="No active rental records found"
-          description="Browse available listings in the explore portal to find and lease your next home."
-          actionText="Explore Listings"
-          actionHref="/explore"
-        />
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rentals.map((r, i) => (
-            <div
-              key={r._id || i}
-              className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-bold text-slate-900 line-clamp-1">
-                    {r.propertyId?.title || "Rental Property"}
-                  </h3>
-                  <StatusBadge status="paid" />
-                </div>
-
-                <div className="flex items-center text-xs font-medium text-slate-500 mb-4">
-                  <MapPin className="w-3.5 h-3.5 mr-1 text-slate-400 shrink-0" />
-                  <span className="line-clamp-1">{r.propertyId?.location || "Location not specified"}</span>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 mb-4">
-                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
-                    Amount Paid
-                  </p>
-                  <p className="text-2xl font-extrabold text-slate-900">
-                    ₹{Number(r.rentAmount).toLocaleString()}
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                  <span>
-                    {r.month
-                      ? new Date(r.month + "-01").toLocaleString("default", {
-                          month: "long",
-                          year: "numeric",
-                        })
-                      : "Current Month"}
-                  </span>
-                </div>
-                <span className="inline-flex items-center gap-1 text-emerald-600 font-semibold">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Verified
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <CustomTable
+        headers={headers}
+        loading={loading}
+        empty={rentalRows.length === 0}
+        emptyMessage="No rental records found"
+      >
+        {rentalRows.map((row) => (
+          <RentalTableRow key={row._id} row={row} />
+        ))}
+      </CustomTable>
     </div>
   );
 }

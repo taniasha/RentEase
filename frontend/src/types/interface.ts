@@ -1,4 +1,3 @@
-
 export type UserRole = "tenant" | "landlord" | "admin";
 
 export interface User {
@@ -15,6 +14,13 @@ export interface AuthResponse {
   message: string;
   token: string;
   user: User;
+}
+
+export interface RentalDetails {
+  rentAmount: number;
+  month?: string;
+  paidAt?: string;
+  paymentId?: string;
 }
 
 export interface Property {
@@ -38,18 +44,24 @@ export interface Property {
   ownerName?: string;
   ownerEmail?: string;
   ownerPhone?: string;
+  landlordId?: string;
+  owner?: string;
   tenant?: {
     name?: string;
     email?: string;
     phone?: string;
   } | null;
+  rentalDetails?: RentalDetails | null;
   showFull?: boolean;
 }
 
 export interface Rental {
   _id?: string;
   propertyId?: Property;
+  landlordId?: User;
   rentAmount: number;
   month: string;
   paidAt?: string;
+  createdAt?: string;
+  paymentId?: string;
 }
