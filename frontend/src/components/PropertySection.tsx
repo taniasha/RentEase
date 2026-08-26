@@ -31,7 +31,7 @@ export default function PropertySection() {
   }, []);
 
   return (
-    <div className="w-full px-4 space-y-6">
+    <div className="w-full space-y-6">
       <CustomHeading title="Available Properties" icon="boxicons:buildings" />
 
       {loading ? (

@@ -63,9 +63,9 @@ export default function LoginView() {
       <Navbar />
 
       <div className="max-w-md w-full mx-auto px-4 mt-12">
-        <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-xl shadow-slate-200/50">
+        <div className="bg-white rounded-xl p-6 sm:p-10 border border-slate-200/80 shadow-xl shadow-slate-200/50">
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               Welcome Back
             </h2>
             <p className="text-sm text-slate-500 mt-2">

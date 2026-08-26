@@ -56,8 +56,8 @@ export default function MyRentalView() {
   ];
 
   return (
-    <div className="mx-auto px-4 space-y-6">
-        <CustomHeading title="My Rentals" icon="solar:bill-list-bold-duotone" />
+    <div className="w-full space-y-6">
+      <CustomHeading title="My Rentals" icon="solar:bill-list-bold-duotone" />
 
       <CustomTable
         headers={headers}

@@ -9,7 +9,7 @@ export default function TenantLayout({
   return (
     <>
       <TenantNavbar />
-      <main style={{ minHeight: "85vh", paddingTop: "6.5rem", paddingBottom: "3rem" }}>
+      <main className="w-full px-6" style={{ minHeight: "85vh", paddingTop: "6.5rem", paddingBottom: "3rem" }}>
         {children}
       </main>
       <Footer />
