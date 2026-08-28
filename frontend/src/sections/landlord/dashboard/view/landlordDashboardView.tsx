@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CustomLandlordCard from "@/customComponents/CustomLandlordCard";
-import { PlusCircle, Sliders } from "lucide-react";
+import { PlusCircle, Sliders, Users } from "lucide-react";
 
 export default function LandlordDashboardView() {
     const [userName, setUserName] = useState("Landlord");

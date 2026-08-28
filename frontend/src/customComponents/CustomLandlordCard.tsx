@@ -78,14 +78,14 @@ export default function CustomLandlordCard({
 
   const renderIcon = () => {
     if (!icon) return null;
+    if (React.isValidElement(icon)) {
+      return icon;
+    }
     if (typeof icon === "string") {
       return <Icon icon={icon} className="w-6 h-6" />;
     }
-    if (typeof icon === "function") {
-      const IconComponent = icon as LucideIcon;
-      return <IconComponent className="w-6 h-6" />;
-    }
-    return icon;
+    const IconComponent = icon as React.ComponentType<{ className?: string }>;
+    return <IconComponent className="w-6 h-6" />;
   };
 
   return (
