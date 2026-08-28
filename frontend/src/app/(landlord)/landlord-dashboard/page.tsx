@@ -1,5 +1,4 @@
-import LandlordLandingView from "@/sections/landlord/LandlordLandingView";
-
+import LandlordDashboardView from "@/sections/landlord/dashboard/view/landlordDashboardView";
 export default function LandlordDashboardPage() {
-  return <LandlordLandingView />;
+  return <LandlordDashboardView />;
 }
