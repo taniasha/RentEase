@@ -54,6 +54,7 @@ export interface Property {
     phone?: string;
   } | null;
   rentalDetails?: RentalDetails | null;
+  status?: "available" | "pending" | "rented" | string;
   showFull?: boolean;
 }
 
