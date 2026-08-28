@@ -63,7 +63,7 @@ export default function CustomTable({
                 <TableHead
                   key={h.id}
                   className={cn(
-                    "bg-[#F0F4FB] font-bold text-slate-700 text-xs",
+                    "bg-[#F0F4FB] font-bold text-slate-700 text-[10px]",
                     h.align === "center" && "text-center",
                     h.align === "right" && "text-right"
                   )}
@@ -78,7 +78,7 @@ export default function CustomTable({
             {empty ? (
               <TableRow>
                 <TableCell colSpan={headers.length} className="py-12 text-center">
-                  <p className="text-sm font-medium text-slate-500 italic">
+                  <p className="text-[10px] font-medium text-slate-500 italic">
                     {emptyMessage}
                   </p>
                 </TableCell>

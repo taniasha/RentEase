@@ -13,7 +13,7 @@ export default function CustomHeading({ title, subTitle, icon, className }: Prop
   return (
     <Card className={cn("w-full bg-white flex items-center gap-4 p-3 rounded-xl border border-slate-200/80 shadow-xs", className)}>
       {icon && (
-        <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-800 shrink-0 border border-brand-100">
+        <div className="w-8 h-8 rounded-lg bg-brand-50 flex items-center justify-center text-brand-800 shrink-0 border border-brand-100">
           <Icon icon={icon} className="w-5 h-5 text-blue-800" />
         </div>
       )}

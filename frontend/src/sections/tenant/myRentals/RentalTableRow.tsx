@@ -20,19 +20,19 @@ export default function RentalTableRow({ rental }: RentalTableRowProps) {
 
   const initials = landlordName
     ? landlordName
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
     : "L";
 
   const formattedDate =
     rental.paidAt || rental.createdAt
       ? new Date(rental.paidAt || rental.createdAt!).toLocaleDateString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        })
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
       : "Today";
 
   const totalRent =
@@ -44,8 +44,8 @@ export default function RentalTableRow({ rental }: RentalTableRowProps) {
     balanceDue === 0 && amountPaid > 0
       ? PaymentStatus.PAID_FULL
       : amountPaid > 0 && balanceDue > 0
-      ? PaymentStatus.PARTIAL
-      : PaymentStatus.PENDING;
+        ? PaymentStatus.PARTIAL
+        : PaymentStatus.PENDING;
 
   const currentStatus = PAYMENT_STATUS_CONFIG[status];
   const StatusIcon = currentStatus.icon;
@@ -54,7 +54,7 @@ export default function RentalTableRow({ rental }: RentalTableRowProps) {
     <TableRow>
       <TableCell>
         <div>
-          <p className="font-bold text-slate-900 text-sm line-clamp-1">
+          <p className="font-bold text-slate-900 text-[12px] line-clamp-1">
             {propertyTitle}
           </p>
           <p className="flex items-center gap-1 text-xs text-slate-500 mt-0.5 line-clamp-1">
@@ -66,11 +66,11 @@ export default function RentalTableRow({ rental }: RentalTableRowProps) {
 
       <TableCell>
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-brand-800 font-bold text-white text-xs shadow-sm">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-brand-800 font-bold text-white text-xs shadow-[12px]">
             {initials}
           </div>
           <div>
-            <p className="font-bold text-slate-900 text-sm">{landlordName}</p>
+            <p className="font-bold text-slate-900 text-[12px]">{landlordName}</p>
             {landlordPhone && (
               <div className="flex items-center gap-1 text-xs text-slate-500 mt-0.5">
                 <Phone className="h-3 w-3 text-slate-400" />
@@ -82,7 +82,7 @@ export default function RentalTableRow({ rental }: RentalTableRowProps) {
       </TableCell>
 
       <TableCell className="text-right">
-        <span className="font-extrabold text-emerald-600 text-sm">
+        <span className="font-extrabold text-emerald-600 text-[12px]">
           ₹{amountPaid.toLocaleString()}
         </span>
       </TableCell>
@@ -90,7 +90,7 @@ export default function RentalTableRow({ rental }: RentalTableRowProps) {
       <TableCell className="text-right">
         {balanceDue > 0 ? (
           <div className="text-right">
-            <span className="font-bold text-amber-600 text-sm">
+            <span className="font-bold text-amber-600 text-[12px]">
               ₹{balanceDue.toLocaleString()}
             </span>
             <p className="text-2xs text-amber-700 mt-0.5 font-medium">Pending</p>

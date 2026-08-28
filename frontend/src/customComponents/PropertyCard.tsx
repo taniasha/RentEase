@@ -59,7 +59,7 @@ export default function PropertyCard() {
                     <span className="text-xs font-semibold text-slate-500">No image added by user</span>
                   </div>
                 )}
-                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm uppercase tracking-wider">
+                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-sm uppercase tracking-wider">
                   {p.type === "sell" ? "For Sale" : "For Rent"}
                 </div>
               </div>
@@ -67,7 +67,7 @@ export default function PropertyCard() {
               {/* Card Body */}
               <div className="p-5 flex-1 flex flex-col">
                 <div className="flex items-baseline justify-between mb-2">
-                  <h3 className="text-lg font-bold text-slate-900 line-clamp-1">
+                  <h3 className="text-md font-bold text-slate-900 line-clamp-1">
                     {p.title || p.name}
                   </h3>
                 </div>
@@ -77,7 +77,7 @@ export default function PropertyCard() {
                   <span className="line-clamp-1">{p.location}</span>
                 </div>
 
-                <p className="text-xl font-extrabold text-blue-600 mb-3">
+                <p className="text-md font-extrabold text-slate-900 mb-3">
                   ₹{Number(p.price).toLocaleString()}
                   {p.type !== "sell" && (
                     <span className="text-xs font-normal text-slate-400">/mo</span>
@@ -93,7 +93,7 @@ export default function PropertyCard() {
                 <Link
                   href={`/property/${p._id}`}
                   prefetch={true}
-                  className="w-full mt-auto h-10 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
+                  className="w-full mt-auto h-10 rounded-xl bg-[#0F172A] hover:bg-blue-900 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
                 >
                   View Details <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

@@ -11,7 +11,7 @@ export default function TenantRecentTable() {
     <div className="space-y-4">
       <Card className="flex items-center justify-between p-4">
         <div>
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+          <h3 className="text-md font-bold text-slate-900 tracking-tight flex items-center gap-2">
             <Icon icon="solar:bill-list-bold-duotone" className="w-5 h-5 text-blue-600" />
             Recent Payment Records
           </h3>

@@ -26,7 +26,7 @@ export default function ProfileCard({
     : "U";
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8">
+    <div className="max-w-xl mx-auto px-4 py-2">
       <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xl shadow-slate-200/40 relative">
         {/* Logout Button */}
         <button
@@ -38,45 +38,45 @@ export default function ProfileCard({
         </button>
 
         {/* Profile Avatar */}
-        <div className="flex flex-col items-center text-center pb-6 border-b border-slate-100">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 text-white text-3xl font-extrabold flex items-center justify-center shadow-lg shadow-blue-500/25 mb-4">
+        <div className="flex flex-col items-center text-center pb-4 border-b border-slate-100">
+          <div className="w-12 h-12 rounded-full bg-blue-900 from-blue-600 to-indigo-500 text-white text-md font-extrabold flex items-center justify-center shadow-lg shadow-blue-500/25 mb-1">
             {initials}
           </div>
-          <h2 className="text-2xl font-bold text-slate-900">{user.name}</h2>
-          <span className="inline-flex items-center gap-1 mt-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">
+          <h2 className="text-lg font-bold text-slate-900">{user.name}</h2>
+          <span className="inline-flex items-center gap-1 mt-1.5 px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">
             <Shield className="w-3 h-3" /> {user.role}
           </span>
         </div>
 
         {/* Details list */}
-        <div className="py-6 space-y-4">
-          <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-2xs">
+        <div className="py-4 space-y-2">
+          <div className="flex items-center gap-3.5 p-2 rounded-2xl bg-slate-50 border border-slate-100">
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-2xs">
               <Mail className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Email</p>
-              <p className="text-sm font-medium text-slate-800">{user.email}</p>
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Email</p>
+              <p className="text-xs font-medium text-slate-800">{user.email}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-2xs">
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-2xs">
               <Phone className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Phone</p>
-              <p className="text-sm font-medium text-slate-800">{user.phone || "Not provided"}</p>
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Phone</p>
+              <p className="text-xs font-medium text-slate-800">{user.phone || "Not provided"}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-2xs">
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-2xs">
               <MapPin className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Address</p>
-              <p className="text-sm font-medium text-slate-800">{user.address || "Not provided"}</p>
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Address</p>
+              <p className="text-xs font-medium text-slate-800">{user.address || "Not provided"}</p>
             </div>
           </div>
         </div>

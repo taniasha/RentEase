@@ -267,10 +267,10 @@ export default function TenantTimelineGraph() {
 
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-1.5 mt-0.5">
-            <span className="text-2xl font-black text-slate-900 tracking-tight">
+            <span className="text-md font-black text-slate-900 tracking-tight">
               {punctualityScore}%
             </span>
-            <span className="text-xs font-bold text-emerald-600 flex items-center">
+            <span className="text-[10px] font-bold text-emerald-600 flex items-center">
               <Icon icon="solar:arrow-right-up-linear" className="w-3.5 h-3.5" />
               Flawless
             </span>

@@ -61,17 +61,17 @@ export default function TenantNavCard({
     >
       <div
         className={cn(
-          "w-12 h-12 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform",
+          "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform",
           scheme.iconBg
         )}
       >
-        <Icon icon={icon} className="w-6 h-6" />
+        <Icon icon={icon} className="w-5 h-5" />
       </div>
       <div>
-        <h4 className={cn("font-bold text-slate-900 transition-colors", scheme.hoverText)}>
+        <h4 className={cn("font-bold text-sm text-slate-900 transition-colors", scheme.hoverText)}>
           {title}
         </h4>
-        <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+        <p className="text-[11px] text-slate-500 mt-0.5">{description}</p>
       </div>
     </Link>
   );
