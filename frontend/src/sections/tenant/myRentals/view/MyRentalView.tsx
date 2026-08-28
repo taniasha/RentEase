@@ -46,7 +46,7 @@ export default function MyRentalView({
   return (
     <div className="w-full">
       {!hideHeading && (
-        <div className="mb-6">
+        <div className="mb-2">
           <CustomHeading title="My Rentals" icon="famicons:receipt-outline" />
         </div>
       )}

@@ -5,7 +5,7 @@ import CustomHeading from "@/customComponents/CustomHeading";
 
 export default function ExplorePropertyView() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <CustomHeading title="Available Properties" icon="boxicons:buildings" />
       <PropertyCard />
     </div>

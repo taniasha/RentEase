@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { MapPin, ArrowRight } from "lucide-react";
+import { MapPin, ArrowRight, ImageOff } from "lucide-react";
 import { getAllProperties } from "@/actions/property";
 import LoadingSpinner from "@/customComponents/LoadingSpinner";
 import EmptyState from "@/customComponents/EmptyState";
@@ -45,13 +45,20 @@ export default function PropertyCard() {
               className="group bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
             >
               {/* Image Container */}
-              <div className="relative h-52 w-full overflow-hidden bg-slate-100">
-                <img
-                  src={p.images && p.images[0] ? p.images[0] : "/default.jpg"}
-                  alt={p.title || "Property image"}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
+              <div className="relative h-52 w-full overflow-hidden bg-slate-100 flex items-center justify-center">
+                {p.images && p.images.length > 0 ? (
+                  <img
+                    src={p.images[0]}
+                    alt={p.title || "Property image"}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-4 bg-slate-100/90 text-slate-400">
+                    <ImageOff className="w-8 h-8 mb-1.5 opacity-60" />
+                    <span className="text-xs font-semibold text-slate-500">No image added by user</span>
+                  </div>
+                )}
                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm uppercase tracking-wider">
                   {p.type === "sell" ? "For Sale" : "For Rent"}
                 </div>

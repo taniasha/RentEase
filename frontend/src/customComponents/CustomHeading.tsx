@@ -18,11 +18,11 @@ export default function CustomHeading({ title, subTitle, icon, className }: Prop
         </div>
       )}
       <div>
-        <h2 className="text-xl sm:text-xl font-bold text-slate-900 leading-tight">
+        <h2 className="text-md sm:text-sm lg:text-md font-bold text-slate-900 leading-tight">
           {title}
         </h2>
         {subTitle && (
-          <p className="text-sm font-normal text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-xs lg:text-sm font-normal text-slate-500 mt-0.5">
             {subTitle}
           </p>
         )}
