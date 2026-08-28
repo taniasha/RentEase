@@ -33,9 +33,7 @@ export default function Navbar() {
     localStorage.removeItem("role");
     localStorage.removeItem("user");
     localStorage.removeItem("userId");
-    setUserRole(null);
-    setUserName(null);
-    router.push("/login");
+    window.location.href = "/";
   };
 
   // If user is not logged in, do not render any navbar

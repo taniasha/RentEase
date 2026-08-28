@@ -38,13 +38,9 @@ export default function TenantProfileView() {
   }, [router]);
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.clear();
-    }
+    localStorage.clear();
     toast.success("Logged out successfully");
-    setTimeout(() => {
-      router.push("/");
-    }, 500);
+    window.location.href = "/";
   };
 
   if (loading) {

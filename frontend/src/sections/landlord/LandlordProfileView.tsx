@@ -38,11 +38,9 @@ export default function LandlordProfileView() {
   }, [router]);
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.clear();
-    }
-    toast.success("Logged out");
-    setTimeout(() => router.push("/"), 500);
+    localStorage.clear();
+    toast.success("Logged out successfully");
+    window.location.href = "/";
   };
 
   if (loading) {
