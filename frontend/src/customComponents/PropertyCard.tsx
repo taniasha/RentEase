@@ -42,7 +42,7 @@ export default function PropertyCard() {
           {properties.map((p) => (
             <div
               key={p._id}
-              className="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
+              className="group bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
             >
               <Link
                 href={`/property/${p._id}`}

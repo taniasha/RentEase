@@ -67,10 +67,10 @@ export default function TenantDashboardView() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-500/20">
             Tenant Hub
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">
+          <h1 className="text-2xl sm:text-xl font-extrabold tracking-tight mb-3">
             Welcome back, {userName}!
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+          <p className="text-slate-300 text-[10px] sm:text-base leading-relaxed mb-6">
             Find your next perfect rental property or review your active lease and payment records.
           </p>
 

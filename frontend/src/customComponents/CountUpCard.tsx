@@ -62,7 +62,7 @@ const StatItem = ({ end, label, suffix = "", icon }: StatItemProps) => {
       <div className="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-800 mb-3 border border-brand-200/60 shadow-2xs">
         {icon}
       </div>
-      <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-1 tabular-nums">
+      <div className="text-xl sm:text-xl lg:text-2xl font-extrabold text-slate-900 tracking-tight mb-1 tabular-nums">
         {count.toLocaleString()}
         <span className="text-brand-800 font-bold ml-0.5">{suffix}</span>
       </div>
@@ -73,9 +73,9 @@ const StatItem = ({ end, label, suffix = "", icon }: StatItemProps) => {
 
 export default function CountUpCard() {
   return (
-    <section className="max-w-6xl mx-auto px-4 w-full my-6 relative z-10">
-      <div className="bg-white border border-slate-200/80 rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl shadow-slate-200/40">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+    <section className=" mx-auto px-8 w-full my-8 relative z-10">
+      <div className="bg-white border border-slate-200/80 rounded-xl p-4 sm:p-4 lg:p-6 shadow-xl shadow-slate-200/40">
+        <div className="grid grid-cols-1 text-[10px] sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
           <StatItem
             end={1200}
             suffix="+"

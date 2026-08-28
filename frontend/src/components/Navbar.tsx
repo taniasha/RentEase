@@ -38,6 +38,11 @@ export default function Navbar() {
     router.push("/login");
   };
 
+  // If user is not logged in, do not render any navbar
+  if (!mounted || !userRole) {
+    return null;
+  }
+
   return (
     <header className="fixed top-4 inset-x-0 z-40 max-w-6xl mx-auto px-4">
       <nav className="flex items-center justify-between h-16 px-6 rounded-full bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-lg shadow-slate-200/20">
@@ -60,44 +65,8 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          {/* Unregistered / Guest Visitor Links */}
-          {(!mounted || !userRole) && (
-            <>
-              <Link
-                href="/"
-                className="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-full hover:bg-slate-100 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/explore"
-                className="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-full hover:bg-slate-100 transition-colors"
-              >
-                Explore
-              </Link>
-              <Link
-                href="/about-us"
-                className="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-full hover:bg-slate-100 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                href="/signup"
-                className="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-full hover:bg-slate-100 transition-colors"
-              >
-                Sign Up
-              </Link>
-              <Link
-                href="/login"
-                className="ml-1 px-4 py-2 text-sm font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-full shadow-sm hover:shadow transition-all"
-              >
-                Sign In
-              </Link>
-            </>
-          )}
-
           {/* Landlord Registered Navigation */}
-          {mounted && userRole === "landlord" && (
+          {userRole === "landlord" && (
             <>
               <Link
                 href="/landlord-dashboard"

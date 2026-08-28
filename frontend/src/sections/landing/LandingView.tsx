@@ -1,30 +1,80 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, ShieldCheck, Zap, HeartHandshake } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import { ArrowRight, ShieldCheck, Zap, HeartHandshake, Home } from "lucide-react";
+import Link from "next/link";
 import Footer from "@/components/Footer";
 import CountUpCard from "@/customComponents/CountUpCard";
 import PropertyList from "@/components/PropertyList";
 
 export default function LandingView() {
   const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+
+      if (token && role) {
+        if (role === "tenant") {
+          router.replace("/tenant-dashboard");
+          return;
+        } else if (role === "landlord") {
+          router.replace("/landlord-dashboard");
+          return;
+        }
+      }
+      setCheckingAuth(false);
+    }
+  }, [router]);
+
+  if (checkingAuth) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <Navbar />
+      {/* Top Header: Logo on left, Login & Sign Up buttons on right */}
+      <header className="fixed top-4 inset-x-0 z-40 max-w-6xl mx-auto px-4">
+        <div className="flex items-center justify-between h-14 px-5 sm:px-6 rounded-full bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-lg shadow-slate-200/20">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-brand-800 flex items-center justify-center text-white shadow-sm">
+              <Home className="w-4 h-4" />
+            </div>
+            <span className="text-lg font-black tracking-tight text-slate-900">
+              Rent<span className="text-brand-800">Ease</span>
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <Link
+              href="/login"
+              className="px-4 py-1.5 text-xs sm:text-sm font-semibold text-slate-700 hover:text-brand-800 hover:bg-slate-100 rounded-full transition-all"
+            >
+              Log In
+            </Link>
+            <Link
+              href="/signup"
+              className="px-4 py-1.5 text-xs sm:text-sm font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-full shadow-sm hover:shadow transition-all"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      </header>
 
       {/* Hero Section with #182E60 theme */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-b from-brand-900 via-brand-800 to-brand-950 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(96,144,210,0.25),rgba(255,255,255,0))]"></div>
 
-        <div className="max-w-6xl mx-auto px-4 relative z-10 text-center">
+        <div className="mx-auto px-4 relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-brand-200 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm">
-            <Zap className="w-3.5 h-3.5 text-amber-400" /> Next-Gen Rental Platform
+            <Zap className="w-3.5 h-3.5 text-amber-400" />Rental Platform
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight max-w-4xl mx-auto mb-6">
+          <h1 className="text-xl sm:text-xl lg:text-4xl font-black tracking-tight leading-tight mx-auto mb-6">
             Find Your Perfect Home or List Your Space with <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-brand-200 to-emerald-300">RentEase</span>
           </h1>
 
@@ -53,14 +103,14 @@ export default function LandingView() {
       <CountUpCard />
 
       {/* Properties Browsing */}
-      <div className="mt-8">
+      <div className="mt-6 px-8">
         <PropertyList />
       </div>
 
       {/* Features Grid */}
       <section className="max-w-6xl mx-auto px-4 py-20">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <div className="text-center mb-8">
+          <h2 className="text-xl lg:text-2xl font-extrabold text-slate-900 tracking-tight">
             Why Choose RentEase?
           </h2>
           <p className="text-base text-slate-500 mt-2 max-w-xl mx-auto">
