@@ -26,6 +26,8 @@ export interface CustomTableProps {
   empty?: boolean;
   emptyMessage?: string;
   className?: string;
+  maxHeight?: string;
+  stickyHeader?: boolean;
 }
 
 export default function CustomTable({
@@ -35,6 +37,8 @@ export default function CustomTable({
   empty = false,
   emptyMessage = "No tenant",
   className = "",
+  maxHeight,
+  stickyHeader = false,
 }: CustomTableProps) {
   if (loading) {
     return (
@@ -45,38 +49,46 @@ export default function CustomTable({
   }
 
   return (
-    <Card className="w-full overflow-hidden">
-      <Table >
-        <TableHeader className="rounded-xl bg-[#F0F4FB] hover:bg-[#F0F4FB] ">
-          <TableRow className="rounded-xl ">
-            {headers.map((h) => (
-              <TableHead
-                key={h.id}
-                className={cn(
-                  h.align === "center" && "text-center",
-                  h.align === "right" && "text-right"
-                )}
-              >
-                {h.label}
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {empty ? (
-            <TableRow>
-              <TableCell colSpan={headers.length} className="py-12 text-center">
-                <p className="text-sm font-medium text-slate-500 italic">
-                  {emptyMessage}
-                </p>
-              </TableCell>
+    <Card className={cn("w-full overflow-hidden p-0", className)}>
+      <div className={cn("overflow-auto", maxHeight)}>
+        <Table>
+          <TableHeader
+            className={cn(
+              "bg-[#F0F4FB] hover:bg-[#F0F4FB]",
+              stickyHeader && "sticky top-0 z-10"
+            )}
+          >
+            <TableRow className="rounded-xl border-b border-slate-200">
+              {headers.map((h) => (
+                <TableHead
+                  key={h.id}
+                  className={cn(
+                    "bg-[#F0F4FB] font-bold text-slate-700 text-xs",
+                    h.align === "center" && "text-center",
+                    h.align === "right" && "text-right"
+                  )}
+                >
+                  {h.label}
+                </TableHead>
+              ))}
             </TableRow>
-          ) : (
-            children
-          )}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          <TableBody>
+            {empty ? (
+              <TableRow>
+                <TableCell colSpan={headers.length} className="py-12 text-center">
+                  <p className="text-sm font-medium text-slate-500 italic">
+                    {emptyMessage}
+                  </p>
+                </TableCell>
+              </TableRow>
+            ) : (
+              children
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </Card>
   );
 }

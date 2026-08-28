@@ -1,5 +1,7 @@
 export type UserRole = "tenant" | "landlord" | "admin";
 
+export * from "./paymentStatus";
+
 export interface User {
   id?: string;
   _id?: string;

@@ -1,19 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
 import { getAllProperties } from "@/actions/property";
 import LoadingSpinner from "@/customComponents/LoadingSpinner";
 import EmptyState from "@/customComponents/EmptyState";
 import { Property } from "@/types/interface";
-import CustomHeading from "@/customComponents/CustomHeading";
 import Card from "@/customComponents/Card";
 
-export default function PropertySection() {
+export default function PropertyCard() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -32,8 +30,6 @@ export default function PropertySection() {
 
   return (
     <div className="w-full space-y-6">
-      <CustomHeading title="Available Properties" icon="boxicons:buildings" />
-
       {loading ? (
         <LoadingSpinner message="Loading properties..." />
       ) : properties.length === 0 ? (
@@ -48,23 +44,32 @@ export default function PropertySection() {
               key={p._id}
               className="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
             >
-              <div className="relative h-52 w-full overflow-hidden bg-slate-100">
+              <Link
+                href={`/property/${p._id}`}
+                prefetch={true}
+                className="relative h-52 w-full overflow-hidden bg-slate-100 block"
+              >
                 <img
                   src={p.images && p.images[0] ? p.images[0] : "/default.jpg"}
                   alt={p.title || "Property image"}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm uppercase tracking-wider">
                   {p.type === "sell" ? "For Sale" : "For Rent"}
                 </div>
-              </div>
+              </Link>
 
               {/* Card Body */}
               <div className="p-5 flex-1 flex flex-col">
                 <div className="flex items-baseline justify-between mb-2">
-                  <h3 className="text-lg font-bold text-slate-900 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                  <Link
+                    href={`/property/${p._id}`}
+                    prefetch={true}
+                    className="text-lg font-bold text-slate-900 line-clamp-1 group-hover:text-blue-600 transition-colors"
+                  >
                     {p.title || p.name}
-                  </h3>
+                  </Link>
                 </div>
 
                 <div className="flex items-center text-xs font-medium text-slate-500 mb-3">
@@ -85,12 +90,13 @@ export default function PropertySection() {
                   </p>
                 )}
 
-                <button
+                <Link
+                  href={`/property/${p._id}`}
+                  prefetch={true}
                   className="w-full mt-auto h-10 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
-                  onClick={() => router.push(`/property/${p._id}`)}
                 >
                   View Details <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                </Link>
               </div>
             </div>
           ))}

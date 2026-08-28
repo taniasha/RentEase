@@ -1,5 +1,5 @@
-import TenantLandingView from "@/sections/tenant/TenantLandingView";
+import TenantDashboardView from "@/sections/tenant/dashboard/view/TenantDashboardView";
 
 export default function TenantDashboardPage() {
-  return <TenantLandingView />;
+  return <TenantDashboardView />;
 }

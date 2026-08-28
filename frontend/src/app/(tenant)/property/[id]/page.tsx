@@ -1,4 +1,4 @@
-import PropertyDetailView from "@/sections/tenant/PropertyDetailView";
+import PropertyDetailView from "@/sections/tenant/property/PropertyDetailView";
 
 export default function PropertyDetailPage() {
   return <PropertyDetailView />;
