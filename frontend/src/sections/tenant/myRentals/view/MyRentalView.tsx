@@ -47,7 +47,7 @@ export default function MyRentalView({
     <div className="w-full">
       {!hideHeading && (
         <div className="mb-6">
-          <CustomHeading title="My Rentals" icon="solar:bill-list-bold-duotone" />
+          <CustomHeading title="My Rentals" icon="famicons:receipt-outline" />
         </div>
       )}
 

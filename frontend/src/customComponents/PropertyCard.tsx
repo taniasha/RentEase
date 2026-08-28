@@ -44,11 +44,8 @@ export default function PropertyCard() {
               key={p._id}
               className="group bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
             >
-              <Link
-                href={`/property/${p._id}`}
-                prefetch={true}
-                className="relative h-52 w-full overflow-hidden bg-slate-100 block"
-              >
+              {/* Image Container */}
+              <div className="relative h-52 w-full overflow-hidden bg-slate-100">
                 <img
                   src={p.images && p.images[0] ? p.images[0] : "/default.jpg"}
                   alt={p.title || "Property image"}
@@ -58,18 +55,14 @@ export default function PropertyCard() {
                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm uppercase tracking-wider">
                   {p.type === "sell" ? "For Sale" : "For Rent"}
                 </div>
-              </Link>
+              </div>
 
               {/* Card Body */}
               <div className="p-5 flex-1 flex flex-col">
                 <div className="flex items-baseline justify-between mb-2">
-                  <Link
-                    href={`/property/${p._id}`}
-                    prefetch={true}
-                    className="text-lg font-bold text-slate-900 line-clamp-1 group-hover:text-blue-600 transition-colors"
-                  >
+                  <h3 className="text-lg font-bold text-slate-900 line-clamp-1">
                     {p.title || p.name}
-                  </Link>
+                  </h3>
                 </div>
 
                 <div className="flex items-center text-xs font-medium text-slate-500 mb-3">
