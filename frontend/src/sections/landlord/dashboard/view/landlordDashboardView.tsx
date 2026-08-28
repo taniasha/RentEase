@@ -2,11 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import CustomLandlordCard from "@/customComponents/CustomLandlordCard";
-import { PlusCircle, Sliders, Users } from "lucide-react";
+import { PlusCircle, Sliders } from "lucide-react";
+import { getLandlordProperties } from "@/actions/landlord";
+import { Property } from "@/types/interface";
+import TenantNavCard from "@/customComponents/TenantNavCard";
+import LoadingSpinner from "@/customComponents/LoadingSpinner";
 
 export default function LandlordDashboardView() {
     const [userName, setUserName] = useState("Landlord");
+    const [properties, setProperties] = useState<Property[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -20,10 +25,39 @@ export default function LandlordDashboardView() {
                 }
             }
         }
+
+        const fetchDashboardData = async () => {
+            try {
+                const data = await getLandlordProperties();
+                setProperties(data || []);
+            } catch (err) {
+                console.error("Error fetching landlord properties:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboardData();
     }, []);
 
+    const totalProperties = properties.length;
+    const occupiedProperties = properties.filter((p) => p.tenant || p.status === "rented").length;
+    const availableProperties = properties.filter((p) => !p.tenant && p.status !== "rented").length;
+    const totalTenants = properties.filter((p) => p.tenant).length;
+    const totalRevenue = properties.reduce((sum, p) => {
+        if (p.rentalDetails && p.rentalDetails.rentAmount) {
+            return sum + Number(p.rentalDetails.rentAmount);
+        }
+        if (p.tenant && p.price) {
+            return sum + Number(p.price);
+        }
+        return sum;
+    }, 0);
+    const occupancyRate = totalProperties > 0 ? Math.round((occupiedProperties / totalProperties) * 100) : 0;
+
     return (
-        <div className="mx-auto px-4 py-8 space-y-12">
+        <div className="mx-auto px-4 py-8 space-y-10">
+            {/* Header Hero Card */}
             <div className="relative rounded-xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 overflow-hidden shadow-xl border border-slate-800">
                 <div className="relative z-10 max-w-2xl">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 text-[10px] font-bold uppercase tracking-wider mb-4 border border-indigo-500/20">
@@ -53,35 +87,60 @@ export default function LandlordDashboardView() {
                 </div>
             </div>
 
-            {/* Main Action Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <CustomLandlordCard
-                    title="Add New Listing"
-                    description="Create a new listing with custom photo galleries, pricing, bedrooms, amenities, and terms."
-                    href="/addproperty"
-                    buttonText="Create Listing"
-                    icon={PlusCircle}
-                    color="blue"
-                />
+            {/* 6 Dynamic Nav / Stat Cards */}
+            {loading ? (
+                <LoadingSpinner message="Loading your portfolio statistics..." />
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <TenantNavCard
+                        href="/manage-properties"
+                        title={`${totalProperties} Properties`}
+                        description="Total listings in your portfolio"
+                        icon="solar:buildings-3-bold-duotone"
+                        color="blue"
+                    />
 
-                <CustomLandlordCard
-                    title="My Tenants"
-                    description="Review current tenants assigned to your properties, their emails, phone contacts, and active rent status."
-                    href="/mytenants"
-                    buttonText="View Tenants"
-                    icon={Users}
-                    color="emerald"
-                />
+                    <TenantNavCard
+                        href="/mytenants"
+                        title={`${totalTenants} Total Tenants`}
+                        description="Active verified tenants"
+                        icon="solar:users-group-rounded-bold-duotone"
+                        color="emerald"
+                    />
 
-                <CustomLandlordCard
-                    title="Manage Listings"
-                    description="Quickly edit pricing, modify details, update photos, or delete active property records."
-                    href="/manage-properties"
-                    buttonText="Manage Properties"
-                    icon={Sliders}
-                    color="slate"
-                />
-            </div>
+                    <TenantNavCard
+                        href="/mytenants"
+                        title={`₹${totalRevenue.toLocaleString()} Revenue`}
+                        description="Monthly rent generated"
+                        icon="solar:wallet-money-bold-duotone"
+                        color="amber"
+                    />
+
+                    <TenantNavCard
+                        href="/mytenants"
+                        title={`${occupiedProperties} Occupied Units`}
+                        description={`${occupancyRate}% overall occupancy rate`}
+                        icon="solar:home-smile-bold-duotone"
+                        color="indigo"
+                    />
+
+                    <TenantNavCard
+                        href="/manage-properties"
+                        title={`${availableProperties} Available Units`}
+                        description="Vacant for immediate leasing"
+                        icon="solar:key-minimalistic-square-bold-duotone"
+                        color="brand"
+                    />
+
+                    <TenantNavCard
+                        href="/addproperty"
+                        title="Add New Listing"
+                        description="Publish property to marketplace"
+                        icon="solar:add-circle-bold-duotone"
+                        color="slate"
+                    />
+                </div>
+            )}
         </div>
     );
 }
