@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import { getAllProperties } from "@/actions/property";
 import { getMyRentals } from "@/actions/tenant";
 import { Property, Rental } from "@/types/interface";
-import TenantNavCard from "@/customComponents/TenantNavCard";
+import TenantNavCard from "@/customComponents/TenantLandlordCard";
 import TenantRecentTable from "../TenantRecentTable";
 import TenantTimelineGraph from "../TenantTimelineGraph";
 

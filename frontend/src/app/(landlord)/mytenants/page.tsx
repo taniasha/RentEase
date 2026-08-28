@@ -1,4 +1,4 @@
-import MyRentHoldersView from "@/sections/landlord/MyRentHoldersView";
+import MyRentHoldersView from "@/sections/landlord/rentHolders/MyRentHoldersView";
 
 export default function MyTenantsPage() {
   return <MyRentHoldersView />;

@@ -14,7 +14,7 @@ type Props = {
   className?: string;
 };
 
-export default function TenantNavCard({
+export default function TenantLandlordCard({
   href,
   title,
   description,
@@ -50,3 +50,5 @@ export default function TenantNavCard({
     </Link>
   );
 }
+
+export { TenantLandlordCard as TenantNavCard };

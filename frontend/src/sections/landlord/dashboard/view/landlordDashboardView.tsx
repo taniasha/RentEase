@@ -5,8 +5,8 @@ import Link from "next/link";
 import { PlusCircle, Sliders } from "lucide-react";
 import { getLandlordProperties } from "@/actions/landlord";
 import { Property } from "@/types/interface";
-import TenantNavCard from "@/customComponents/TenantNavCard";
 import LoadingSpinner from "@/customComponents/LoadingSpinner";
+import TenantLandlordCard from "@/customComponents/TenantLandlordCard";
 
 export default function LandlordDashboardView() {
     const [userName, setUserName] = useState("Landlord");
@@ -56,7 +56,7 @@ export default function LandlordDashboardView() {
     const occupancyRate = totalProperties > 0 ? Math.round((occupiedProperties / totalProperties) * 100) : 0;
 
     return (
-        <div className="mx-auto px-4 py-8 space-y-10">
+        <div className="mx-auto px-4  space-y-8">
             {/* Header Hero Card */}
             <div className="relative rounded-xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 overflow-hidden shadow-xl border border-slate-800">
                 <div className="relative z-10 max-w-2xl">
@@ -87,12 +87,12 @@ export default function LandlordDashboardView() {
                 </div>
             </div>
 
-            {/* 6 Dynamic Nav / Stat Cards */}
+            {/*  Cards */}
             {loading ? (
                 <LoadingSpinner message="Loading your portfolio statistics..." />
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <TenantNavCard
+                    <TenantLandlordCard
                         href="/manage-properties"
                         title={`${totalProperties} Properties`}
                         description="Total listings in your portfolio"
@@ -100,7 +100,7 @@ export default function LandlordDashboardView() {
                         color="blue"
                     />
 
-                    <TenantNavCard
+                    <TenantLandlordCard
                         href="/mytenants"
                         title={`${totalTenants} Total Tenants`}
                         description="Active verified tenants"
@@ -108,7 +108,7 @@ export default function LandlordDashboardView() {
                         color="emerald"
                     />
 
-                    <TenantNavCard
+                    <TenantLandlordCard
                         href="/mytenants"
                         title={`₹${totalRevenue.toLocaleString()} Revenue`}
                         description="Monthly rent generated"
@@ -116,7 +116,7 @@ export default function LandlordDashboardView() {
                         color="amber"
                     />
 
-                    <TenantNavCard
+                    <TenantLandlordCard
                         href="/mytenants"
                         title={`${occupiedProperties} Occupied Units`}
                         description={`${occupancyRate}% overall occupancy rate`}
@@ -124,7 +124,7 @@ export default function LandlordDashboardView() {
                         color="indigo"
                     />
 
-                    <TenantNavCard
+                    <TenantLandlordCard
                         href="/manage-properties"
                         title={`${availableProperties} Available Units`}
                         description="Vacant for immediate leasing"
@@ -132,7 +132,7 @@ export default function LandlordDashboardView() {
                         color="brand"
                     />
 
-                    <TenantNavCard
+                    <TenantLandlordCard
                         href="/addproperty"
                         title="Add New Listing"
                         description="Publish property to marketplace"

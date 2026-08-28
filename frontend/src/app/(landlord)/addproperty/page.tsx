@@ -1,4 +1,4 @@
-import AddPropertyView from "@/sections/landlord/AddPropertyView";
+import AddPropertyView from "@/sections/landlord/property/AddPropertyView";
 
 export default function AddPropertyPage() {
   return <AddPropertyView />;
