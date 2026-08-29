@@ -21,6 +21,12 @@ export default function AuthGuard({ children, allowedRole }: AuthGuardProps) {
     const userStr = localStorage.getItem("user");
     const role = localStorage.getItem("role");
 
+    // Allow shared routes accessible by both landlord and tenant
+    if (pathname.startsWith("/property") || pathname.startsWith("/explore")) {
+      setAuthorized(true);
+      return;
+    }
+
     // 1. If not logged in at all, redirect immediately to login
     if (!token || !userStr) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);

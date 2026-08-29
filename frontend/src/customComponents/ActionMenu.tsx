@@ -109,11 +109,17 @@ export default function ActionMenu({
               "absolute top-10 w-44 bg-white rounded-xl shadow-xl border border-slate-200/90 py-1.5 z-30 transition-all",
               align === "right" ? "right-0" : "left-0"
             )}
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             {onView && (
               <button
                 type="button"
-                onClick={() => handleAction(onView)}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAction(onView);
+                }}
                 className="w-full px-3.5 py-2 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2.5 transition-colors cursor-pointer"
               >
                 <Eye className="w-4 h-4 text-slate-400" />
@@ -124,7 +130,11 @@ export default function ActionMenu({
             {onEdit && (
               <button
                 type="button"
-                onClick={() => handleAction(onEdit)}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAction(onEdit);
+                }}
                 className="w-full px-3.5 py-2 text-left text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 flex items-center gap-2.5 transition-colors cursor-pointer"
               >
                 <Edit3 className="w-4 h-4 text-blue-500" />
@@ -136,7 +146,11 @@ export default function ActionMenu({
               <button
                 key={idx}
                 type="button"
-                onClick={() => handleAction(action.onClick)}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAction(action.onClick);
+                }}
                 className={cn(
                   "w-full px-3.5 py-2 text-left text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer",
                   action.variant === "danger"
@@ -160,7 +174,11 @@ export default function ActionMenu({
                 <div className="my-1 border-t border-slate-100" />
                 <button
                   type="button"
-                  onClick={handleDeleteClick}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteClick();
+                  }}
                   className="w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4 text-red-500" />

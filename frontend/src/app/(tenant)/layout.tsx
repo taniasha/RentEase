@@ -1,4 +1,4 @@
-import TenantNavbar from "@/components/TenantNavbar";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AuthGuard from "@/customComponents/AuthGuard";
 
@@ -9,7 +9,7 @@ export default function TenantLayout({
 }) {
   return (
     <AuthGuard allowedRole="tenant">
-      <TenantNavbar />
+      <Navbar />
       <main className="w-full px-3 sm:px-6 lg:px-8" style={{ minHeight: "85vh", paddingTop: "5.5rem", paddingBottom: "3rem" }}>
         {children}
       </main>
