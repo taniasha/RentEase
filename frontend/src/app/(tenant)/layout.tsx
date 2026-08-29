@@ -10,7 +10,7 @@ export default function TenantLayout({
   return (
     <AuthGuard allowedRole="tenant">
       <TenantNavbar />
-      <main className="w-full px-6" style={{ minHeight: "85vh", paddingTop: "6.5rem", paddingBottom: "3rem" }}>
+      <main className="w-full px-3 sm:px-6 lg:px-8" style={{ minHeight: "85vh", paddingTop: "5.5rem", paddingBottom: "3rem" }}>
         {children}
       </main>
       <Footer />
