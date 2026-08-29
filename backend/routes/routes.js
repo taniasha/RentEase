@@ -25,6 +25,7 @@ router.post("/add-property", auth, verifyLandlord, addProperty);
 router.get("/landlord-properties", auth, verifyLandlord, getLandlordProperties);
 router.put("/update-property/:id", auth, verifyLandlord, updateProperty);
 router.delete("/delete-property/:id", auth, verifyLandlord, deleteProperty);
+router.delete("/deleteproperty/:id", auth, verifyLandlord, deleteProperty);
 
 // 🔹 PROFILES
 router.get("/tenant-user/:id", auth, getProfile);

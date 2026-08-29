@@ -62,7 +62,7 @@ const CustomSelect = forwardRef<HTMLSelectElement, CustomSelectProps>(
             id={selectId}
             name={name}
             className={cn(
-              "h-11 rounded-md px-3.5 text-sm shadow-sm",
+              "h-10 rounded-md px-3.5 text-sm shadow-sm",
               icon && "pl-10",
               error && "border-red-500 focus-visible:ring-red-500/20",
               className

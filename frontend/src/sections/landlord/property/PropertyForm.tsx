@@ -81,7 +81,7 @@ export default function PropertyForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       <div>
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
+        <h3 className="text-sm font-extrabold uppercase tracking-wider text-black mb-4">
           Basic Information
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -121,7 +121,7 @@ export default function PropertyForm({
 
       {/* Section: Specs */}
       <div className="pt-4 border-t border-slate-100">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-black mb-4">
           Property Details
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -178,7 +178,7 @@ export default function PropertyForm({
 
       {/* Section: Features & Media */}
       <div className="pt-4 border-t border-slate-100">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-black mb-4">
           Features & Media
         </h3>
         <div className="space-y-4">
@@ -196,7 +196,7 @@ export default function PropertyForm({
           />
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-700 tracking-wide block">
+            <label className="text-xs font-semibold text-black tracking-wide block">
               Property Description
             </label>
             <textarea
@@ -211,7 +211,7 @@ export default function PropertyForm({
 
       {/* Section: Owner Contact Info */}
       <div className="pt-4 border-t border-slate-100">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-black mb-4">
           Owner Contact Information
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -243,7 +243,7 @@ export default function PropertyForm({
           <button
             type="button"
             onClick={onCancel}
-            className="h-11 px-6 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-sm font-semibold transition-colors"
+            className="h-10 px-6 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-semibold transition-colors"
           >
             {cancelButtonText}
           </button>
@@ -251,7 +251,7 @@ export default function PropertyForm({
         <button
           type="submit"
           disabled={loading}
-          className="h-11 px-8 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold text-sm shadow-md shadow-blue-600/20 transition-all flex items-center gap-2"
+          className="h-10 px-6 rounded-xl bg-blue-900 hover:bg-blue-700 disabled:opacity-60 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition-all flex items-center gap-2"
         >
           {loading ? (
             <>

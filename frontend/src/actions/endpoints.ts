@@ -8,7 +8,7 @@ export const ENDPOINTS = {
     GET_ALL: "/getall",
     GET_BY_ID: (id: string) => `/${id}`,
     UPDATE: (id: string) => `/update-property/${id}`,
-    DELETE: (id: string) => `/deleteproperty/${id}`,
+    DELETE: (id: string) => `/delete-property/${id}`,
   },
   TENANT: {
     MY_RENTALS: "/my-rentals",

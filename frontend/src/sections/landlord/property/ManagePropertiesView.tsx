@@ -3,14 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { Sliders, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { getLandlordProperties } from "@/actions/landlord";
 import { deleteProperty } from "@/actions/property";
 import ActionMenu from "@/customComponents/ActionMenu";
 import EmptyState from "@/customComponents/EmptyState";
 import LoadingSpinner from "@/customComponents/LoadingSpinner";
-import StatusBadge from "@/customComponents/StatusBadge";
 import { Property } from "@/types/interface";
+import CustomHeading from "@/customComponents/CustomHeading";
 
 export default function ManagePropertiesView() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -39,7 +39,6 @@ export default function ManagePropertiesView() {
   };
 
   const handleDeleteProperty = async (id: string) => {
-    if (!window.confirm("Are you sure you want to delete this property listing?")) return;
     try {
       await deleteProperty(id);
       toast.success("Property deleted successfully!");
@@ -51,17 +50,8 @@ export default function ManagePropertiesView() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
-            <Sliders className="w-7 h-7 text-blue-600" /> Manage Properties
-          </h1>
-          <p className="text-sm text-slate-500 mt-1">
-            Update listing details, pricing, availability, or remove listings.
-          </p>
-        </div>
-      </div>
+    <div className="space-y-2 mx-auto">
+      <CustomHeading title="Manage Properties" icon="bi:building" />
 
       {loading ? (
         <LoadingSpinner message="Loading your properties..." />
@@ -73,23 +63,22 @@ export default function ManagePropertiesView() {
           actionHref="/addproperty"
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {properties.map((p) => (
             <div
               key={p._id}
-              className="group relative bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col"
+              className="group relative bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col"
             >
               {/* Image Preview */}
               <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.images && p.images[0] ? p.images[0] : "/default.jpg"}
                   alt={p.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
 
-                {/* Floating Action Menu */}
                 <ActionMenu
+                  onView={() => router.push(`/property/${p._id}`)}
                   onEdit={() => handleEdit(p)}
                   onDelete={() => handleDeleteProperty(p._id)}
                 />
@@ -109,20 +98,10 @@ export default function ManagePropertiesView() {
                     </div>
                   ) : null}
 
-                  <p className="text-lg font-extrabold text-blue-600 mb-3">
+                  <p className="text-md font-extrabold text-blue-800 mb-3">
                     ₹{Number(p.price).toLocaleString()}
                     <span className="text-xs font-normal text-slate-400">/mo</span>
                   </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <StatusBadge status={p.tenant ? "Rented" : "Available"} />
-                  <button
-                    onClick={() => handleEdit(p)}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors"
-                  >
-                    Edit Listing →
-                  </button>
                 </div>
               </div>
             </div>

@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { Edit3, ArrowLeft } from "lucide-react";
 import { getPropertyById, updateProperty } from "@/actions/property";
 import LoadingSpinner from "@/customComponents/LoadingSpinner";
 import PropertyForm from "./PropertyForm";
 import { PropertyFormData } from "@/types/propertySchema";
+import CustomBackNavigate from "@/customComponents/CustomBackNavigate";
+import CustomHeading from "@/customComponents/CustomHeading";
 
 export default function EditPropertyView() {
   const params = useParams();
@@ -89,36 +90,25 @@ export default function EditPropertyView() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <button
-        onClick={() => router.push("/manage-properties")}
-        className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-900 mb-6 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" /> Back to Manage Properties
-      </button>
+    <>
+      <CustomBackNavigate href="/manage-properties" label="Back to Manage Properties" />
+      <div className="mx-auto space-y-2">
+        <CustomHeading title="Edit Property" icon="bi:building" />
 
-      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-xl shadow-slate-200/40">
-        <div className="flex items-center gap-3 pb-6 border-b border-slate-100 mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
-            <Edit3 className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Edit Property Listing</h1>
-            <p className="text-xs text-slate-500 mt-0.5">Modify listing information and save changes</p>
-          </div>
+        <div className="bg-white rounded-xl p-4 sm:p-6 border border-slate-200/80 shadow-xl shadow-slate-200/40">
+
+          {initialData && (
+            <PropertyForm
+              initialValues={initialData}
+              onSubmit={handleSubmit}
+              loading={saving}
+              submitButtonText="Save Changes"
+              onCancel={() => router.push("/manage-properties")}
+              cancelButtonText="Cancel"
+            />
+          )}
         </div>
-
-        {initialData && (
-          <PropertyForm
-            initialValues={initialData}
-            onSubmit={handleSubmit}
-            loading={saving}
-            submitButtonText="Save Changes"
-            onCancel={() => router.push("/manage-properties")}
-            cancelButtonText="Cancel"
-          />
-        )}
       </div>
-    </div>
+    </>
   );
 }

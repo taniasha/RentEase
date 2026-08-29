@@ -26,8 +26,8 @@ export default function ProfileCard({
     : "U";
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-2">
-      <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xl shadow-slate-200/40 relative">
+    <div className="max-w-xl mx-auto px-4 ">
+      <div className="bg-white rounded-xl p-6 border border-slate-200/80 shadow-xl shadow-slate-200/40 relative">
         {/* Logout Button */}
         <button
           onClick={onLogout}

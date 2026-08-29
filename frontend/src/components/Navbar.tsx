@@ -79,7 +79,7 @@ export default function Navbar() {
                 Add Property
               </Link>
               <Link
-                href="/mytenants"
+                href="/my-tenants"
                 className="px-3 py-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-full hover:bg-slate-100 transition-colors"
               >
                 My Tenants

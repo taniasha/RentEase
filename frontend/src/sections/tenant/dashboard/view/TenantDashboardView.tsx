@@ -53,12 +53,9 @@ export default function TenantDashboardView() {
     fetchData();
   }, []);
 
-  const rentedCount = rentals.length > 0 ? rentals.length : 1;
-  const totalMonths = rentals.length > 0 ? rentals.length : 6;
-  const totalPaid =
-    rentals.length > 0
-      ? rentals.reduce((acc, r) => acc + (Number(r.rentAmount) || 0), 0)
-      : 136000;
+  const rentedCount = rentals.length;
+  const totalMonths = rentals.length;
+  const totalPaid = rentals.reduce((acc, r) => acc + (Number(r.rentAmount) || 0), 0);
 
   return (
     <div className="w-full space-y-10">

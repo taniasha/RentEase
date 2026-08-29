@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Users } from "lucide-react";
 import { getLandlordProperties } from "@/actions/landlord";
 import CustomTable, { HeaderItem } from "@/customComponents/CustomTable";
 import TenantTableRow, { TenantRowData } from "./TenantTableRow";
 import { Property } from "@/types/interface";
+import CustomHeading from "@/customComponents/CustomHeading";
 
 export default function MyRentHoldersView() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -64,23 +64,22 @@ export default function MyRentHoldersView() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
-          <Users className="w-7 h-7 text-brand-800" /> My Tenants
-        </h1>
-      </div>
+    <div className="space-y-2 mx-auto">
+      <CustomHeading
+        title="My Tenants" 
+        icon={"cuida:users-outline"}
+      />
 
-      <CustomTable
-        headers={headers}
-        loading={loading}
-        empty={tenantRows.length === 0}
-        emptyMessage="No tenant"
-      >
-        {tenantRows.map((row) => (
-          <TenantTableRow key={row._id} row={row} />
-        ))}
-      </CustomTable>
+        <CustomTable
+          headers={headers}
+          loading={loading}
+          empty={tenantRows.length === 0}
+          emptyMessage="No tenant"
+        >
+          {tenantRows.map((row) => (
+            <TenantTableRow key={row._id} row={row} />
+          ))}
+        </CustomTable>
     </div>
   );
 }

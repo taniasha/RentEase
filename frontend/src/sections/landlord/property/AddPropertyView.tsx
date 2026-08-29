@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { Building, ArrowLeft } from "lucide-react";
+import { Building } from "lucide-react";
 import { addProperty } from "@/actions/property";
 import PropertyForm from "./PropertyForm";
 import { PropertyFormData } from "@/types/propertySchema";
+import CustomBackNavigate from "@/customComponents/CustomBackNavigate";
+import CustomHeading from "@/customComponents/CustomHeading";
 
 export default function AddPropertyView() {
   const router = useRouter();
@@ -43,33 +45,19 @@ export default function AddPropertyView() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <button
-        onClick={() => router.push("/landlord-dashboard")}
-        className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-900 mb-6 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" /> Back to Dashboard
-      </button>
+    <div className="space-y-2 ">
+      <CustomHeading title="Add New Property" icon="bi:building" />
 
-      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-xl shadow-slate-200/40">
-        <div className="flex items-center gap-3 pb-6 border-b border-slate-100 mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
-            <Building className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Add New Property</h1>
-            <p className="text-xs text-slate-500 mt-0.5">Fill in the property details below to list your rental</p>
-          </div>
-        </div>
-
+      <div className="bg-white rounded-xl p-4 sm:p-6 border border-slate-200/80 shadow-xl shadow-slate-200/40">
         <PropertyForm
           onSubmit={handleSubmit}
           loading={loading}
-          submitButtonText="Publish Listing"
+          submitButtonText="Add Property"
           onCancel={() => router.push("/landlord-dashboard")}
           cancelButtonText="Cancel"
         />
       </div>
     </div>
+
   );
 }

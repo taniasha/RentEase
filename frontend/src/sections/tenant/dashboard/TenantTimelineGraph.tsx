@@ -20,52 +20,10 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   ),
 });
 
-const DEFAULT_FALLBACK_RECORDS: PaymentRecord[] = [
-  {
-    month: "Dec",
-    year: "2025",
-    amount: "₹22,000",
-    dueDate: "05 Dec 2025",
-    paidDate: "03 Dec 2025",
-    daysEarly: 2,
-    status: "early",
-    score: 92,
-  },
-  {
-    month: "Jan",
-    year: "2026",
-    amount: "₹25,000",
-    dueDate: "05 Jan 2026",
-    paidDate: "01 Jan 2026",
-    daysEarly: 4,
-    status: "early",
-    score: 96,
-  },
-  {
-    month: "Feb",
-    year: "2026",
-    amount: "₹18,500",
-    dueDate: "05 Feb 2026",
-    paidDate: "02 Feb 2026",
-    daysEarly: 3,
-    status: "early",
-    score: 95,
-  },
-  {
-    month: "Mar",
-    year: "2026",
-    amount: "₹22,000",
-    dueDate: "05 Mar 2026",
-    paidDate: "01 Mar 2026",
-    daysEarly: 4,
-    status: "early",
-    score: 98,
-  },
-];
-
 export default function TenantTimelineGraph() {
   const [chartType, setChartType] = useState<"bar" | "area">("bar");
-  const [timelineData, setTimelineData] = useState<PaymentRecord[]>(DEFAULT_FALLBACK_RECORDS);
+  const [timelineData, setTimelineData] = useState<PaymentRecord[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRentalTimeline = async () => {
@@ -107,18 +65,25 @@ export default function TenantTimelineGraph() {
           });
 
           setTimelineData(mapped);
+        } else {
+          setTimelineData([]);
         }
       } catch (err) {
         console.error("Error loading timeline data:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchRentalTimeline();
   }, []);
 
-  const punctualityScore = Math.round(
-    timelineData.reduce((acc, curr) => acc + curr.score, 0) / timelineData.length
-  );
+  const punctualityScore =
+    timelineData.length > 0
+      ? Math.round(
+          timelineData.reduce((acc, curr) => acc + curr.score, 0) / timelineData.length
+        )
+      : 100;
 
   // Apex Chart Configuration
   const chartOptions: ApexOptions = {
@@ -279,16 +244,32 @@ export default function TenantTimelineGraph() {
       </Card>
 
       <Card className="p-5 space-y-4">
-        {/* Apex Chart Component */}
-        <div className="w-full">
-          <Chart
-            options={chartOptions}
-            series={chartSeries}
-            type={chartType}
-            height={220}
-            width="100%"
-          />
-        </div>
+        {loading ? (
+          <div className="h-[220px] w-full flex items-center justify-center bg-slate-50/50 rounded-xl">
+            <div className="flex flex-col items-center gap-2 text-slate-400">
+              <Icon icon="solar:chart-2-bold-duotone" className="w-8 h-8 animate-pulse text-blue-500" />
+              <span className="text-xs font-medium">Loading timeline...</span>
+            </div>
+          </div>
+        ) : timelineData.length === 0 ? (
+          <div className="h-[220px] w-full flex flex-col items-center justify-center text-center p-6 bg-slate-50/50 rounded-xl border border-dashed border-slate-200">
+            <Icon icon="solar:bill-check-bold-duotone" className="w-10 h-10 text-slate-300 mb-2" />
+            <p className="text-sm font-semibold text-slate-700">No payment history yet</p>
+            <p className="text-xs text-slate-400 mt-1 max-w-xs">
+              When you pay rent for your rental properties, your payment timeline & punctuality score will appear here.
+            </p>
+          </div>
+        ) : (
+          <div className="w-full">
+            <Chart
+              options={chartOptions}
+              series={chartSeries}
+              type={chartType}
+              height={220}
+              width="100%"
+            />
+          </div>
+        )}
       </Card>
     </div>
   );
