@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { MapPin } from "lucide-react";
+import { MapPin, ImageOff } from "lucide-react";
 import { getLandlordProperties } from "@/actions/landlord";
 import { deleteProperty } from "@/actions/property";
 import ActionMenu from "@/customComponents/ActionMenu";
@@ -70,12 +70,19 @@ export default function ManagePropertiesView() {
               className="group relative bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col"
             >
               {/* Image Preview */}
-              <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
-                <img
-                  src={p.images && p.images[0] ? p.images[0] : "/default.jpg"}
-                  alt={p.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              <div className="relative h-48 w-full bg-slate-100 overflow-hidden flex items-center justify-center">
+                {p.images ? (
+                  <img
+                    src={p.images[0]}
+                    alt={p.title || "Property preview"}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-4 bg-slate-100/90 text-slate-400">
+                    <ImageOff className="w-8 h-8 mb-1.5 opacity-60" />
+                    <span className="text-xs font-semibold text-slate-500">No image has been added</span>
+                  </div>
+                )}
 
                 <ActionMenu
                   onView={() => router.push(`/property/${p._id}`)}

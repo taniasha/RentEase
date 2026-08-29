@@ -56,8 +56,8 @@ export default function LandlordDashboardView() {
     const occupancyRate = totalProperties > 0 ? Math.round((occupiedProperties / totalProperties) * 100) : 0;
 
     return (
-        <div className="mx-auto px-4  space-y-8">
-            {/* Header Hero Card */}
+        <div className="mx-auto space-y-6">
+            {/* Header Hero Card */} 
             <div className="relative rounded-xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 overflow-hidden shadow-xl border border-slate-800">
                 <div className="relative z-10 max-w-2xl">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 text-[10px] font-bold uppercase tracking-wider mb-4 border border-indigo-500/20">
