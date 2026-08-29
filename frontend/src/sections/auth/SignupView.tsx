@@ -145,7 +145,7 @@ export default function SignupView() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-11 mt-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md shadow-blue-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60"
+              className="w-full h-10 mt-3 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-semibold text-sm shadow-md shadow-blue-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60"
             >
               {loading ? (
                 <>

@@ -26,6 +26,7 @@ export function SinglePropertyCard({
   onDelete,
 }: PropertyCardItemProps) {
   const router = useRouter();
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div
@@ -34,12 +35,13 @@ export function SinglePropertyCard({
     >
       {/* Image Container */}
       <div className="relative h-52 w-full overflow-hidden bg-slate-100 flex items-center justify-center">
-        {p.images && p.images.length > 0 && p.images[0] ? (
+        {p.images && p.images.length > 0 && p.images[0] && !imgError ? (
           <img
             src={p.images[0]}
-            alt={p.title || p.name || "Property image"}
+            alt=""
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center text-center p-4 bg-slate-100/90 text-slate-400">
@@ -170,7 +172,7 @@ export default function PropertyCard({
           actionHref={emptyActionHref || (variant === "manage" ? "/addproperty" : undefined)}
         />
       ) : (
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {properties.map((p) => (
             <SinglePropertyCard
               key={p._id}

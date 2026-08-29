@@ -17,6 +17,7 @@ import {
   FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import LandingNavbar from "./LandingNavbar";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -54,9 +55,13 @@ export default function Navbar() {
     window.location.href = "/";
   };
 
-  // If user is not logged in, do not render any navbar
-  if (!mounted || !userRole) {
+  if (!mounted) {
     return null;
+  }
+
+  // If user is not logged in (guest visitor), show LandingNavbar
+  if (!userRole) {
+    return <LandingNavbar />;
   }
 
   const landlordLinks = [
@@ -79,8 +84,8 @@ export default function Navbar() {
     userRole === "landlord"
       ? "/landlord-dashboard"
       : userRole === "tenant"
-      ? "/tenant-dashboard"
-      : "/";
+        ? "/tenant-dashboard"
+        : "/";
 
   return (
     <header className="fixed top-3 inset-x-0 z-40 max-w-6xl mx-auto px-4">

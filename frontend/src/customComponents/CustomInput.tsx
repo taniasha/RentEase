@@ -57,7 +57,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             className={cn(
               "h-10 rounded-md px-3.5 text-sm shadow-sm",
               icon && "pl-10",
-              error && "border-red-500 focus-visible:ring-red-500/20",
+              error && " ",
               className
             )}
             {...props}
@@ -66,7 +66,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
         {error && (
           <p className="text-xs font-medium text-red-600 flex items-center gap-1 mt-1 animate-in fade-in duration-200">
-            <span>●</span> {error}
+           {error}
           </p>
         )}
 

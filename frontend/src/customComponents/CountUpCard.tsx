@@ -59,10 +59,10 @@ const StatItem = ({ end, label, suffix = "", icon }: StatItemProps) => {
 
   return (
     <div ref={domRef} className="flex flex-col items-center p-6 text-center">
-      <div className="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-800 mb-3 border border-brand-200/60 shadow-2xs">
+      <div className="w-10 h-10 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-800 mb-3 border border-brand-200/60 shadow-2xs">
         {icon}
       </div>
-      <div className="text-xl sm:text-xl lg:text-2xl font-extrabold text-slate-900 tracking-tight mb-1 tabular-nums">
+      <div className="text-lg sm:text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight mb-1 tabular-nums">
         {count.toLocaleString()}
         <span className="text-brand-800 font-bold ml-0.5">{suffix}</span>
       </div>
@@ -80,25 +80,25 @@ export default function CountUpCard() {
             end={1200}
             suffix="+"
             label="Verified Properties"
-            icon={<Home className="w-6 h-6" />}
+            icon={<Home className="w-5 h-5" />}
           />
           <StatItem
             end={4500}
             suffix="+"
             label="Active Tenants"
-            icon={<Users className="w-6 h-6" />}
+            icon={<Users className="w-5 h-5" />}
           />
           <StatItem
             end={850}
             suffix="+"
             label="Trusted Landlords"
-            icon={<Sparkles className="w-6 h-6" />}
+            icon={<Sparkles className="w-5 h-5" />}
           />
           <StatItem
             end={99}
             suffix="%"
             label="Satisfaction Rate"
-            icon={<TrendingUp className="w-6 h-6" />}
+            icon={<TrendingUp className="w-5 h-5" />}
           />
         </div>
       </div>

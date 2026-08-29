@@ -8,6 +8,7 @@ import LoadingSpinner from "@/customComponents/LoadingSpinner";
 import StatusBadge from "@/customComponents/StatusBadge";
 import { Property } from "@/types/interface";
 import Card from "@/customComponents/Card";
+import CustomBackNavigate from "@/customComponents/CustomBackNavigate";
 
 export default function PropertyDetailView() {
   const params = useParams();
@@ -17,6 +18,7 @@ export default function PropertyDetailView() {
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState(0);
+  const [imgError, setImgError] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
@@ -97,13 +99,7 @@ export default function PropertyDetailView() {
 
   return (
     <div className="w-full mx-auto px-4 sm:px-6">
-      {/* Back Button */}
-      <button
-        onClick={() => router.back()}
-        className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-900 mb-6 transition-colors group cursor-pointer"
-      >
-        <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back
-      </button>
+    <CustomBackNavigate/>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* LEFT COLUMN */}
@@ -325,7 +321,7 @@ export default function PropertyDetailView() {
         </div>
 
         {/* IMAGE GALLERY */}
-        {property.images && property.images.length > 0 ? (
+        {property.images && property.images.length > 0 && !imgError ? (
           <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-6 space-y-4">
             <div className="relative h-80 sm:h-96 lg:h-[460px] w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-md">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -333,6 +329,7 @@ export default function PropertyDetailView() {
                 src={property.images[activeImage] || "/default.jpg"}
                 alt={property.title || "Property"}
                 className="w-full h-full object-cover transition-all duration-300"
+                onError={() => setImgError(true)}
               />
               {property.images.length > 1 && (
                 <span className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-2.5 py-1 rounded-lg">
